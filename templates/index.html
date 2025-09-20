@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Career Guidance Assistant</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js"/>
+  <style>
+    /* Update 1.0.1 */
+     :root {
+            --primary: rgba(29, 10, 239, 0.728);
+            --primary-dark: #698bd4d8;
+            --secondary: #64748b;
+            --accent: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --success: #22c55e;
+            --card-bg: #ffffff;
+            --border: #e2e8f0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        
+    body { font-family: Arial, sans-serif;  background-color: #e9e9f1 }
+    h1, h2 { text-align: center; }
+    form { background: #fff; padding: 20px; border-radius: 12px;  margin: auto; }
+    label { font-weight: bold; }
+    select, input, button { margin: 8px 0; padding: 10px; width: 100%; border-radius: 8px; border: 1px solid #ddd; }
+    button { background: #64a96f; color: white; cursor: pointer; }
+    button:disabled { background: gray; }
+    .career-card { background: #fff; border: 1px solid #ddd; border-radius: 12px; padding: 15px; margin: 10px 0; }
+    .career-title { font-size: 1.2em; font-weight: bold; margin-bottom: 6px; }
+    .career-meta { margin-top: 8px; font-size: 0.9em; color: #444; }
+    .demand.high-demand { color: green; font-weight: bold; }
+    .demand.medium-demand { color: orange; font-weight: bold; }
+    .demand.low-demand { color: red; font-weight: bold; }
+    canvas { max-width: 800px; margin: 20px auto; display: block; }
+    .roadmap-step { background: #fff; border-left: 4px solid #007bff; margin: 10px 0; padding: 12px; border-radius: 6px; }
+    .step-title { font-weight: bold; margin-bottom: 4px; }
+    .resources ul { padding-left: 20px; }
+    .hidden { display: none; }
+
+
+    /* update overwrite */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(120deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-bottom: 50px;
+        
+          }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-icon {
+            margin-right: 10px;
+            font-size: 2rem;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 2rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+        
+        nav ul li a:hover {
+            opacity: 0.8;
+        }
+
+    
+
+    form input ,form select{
+      /* background-color: #2068c7; */
+      margin: 2px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 2px 1px #eee;
+
+    }
+
+  form{
+    box-shadow: 0 0 2px 2px;
+    margin: 5px;
+    /* background-color: #f0eddb; */
+
+  }
+    
+  footer {
+      background-color: var(--dark);
+      color: white;
+      padding: 2rem 0;
+      text-align: center;
+      font-size: 0.9rem;
+      margin-top: 100px;
+    }
+    .formtext{
+      box-shadow: 0 0 2px 2px ;
+      margin: 5px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      height: 60px;
+      background-color: #f8e5e5;
+      color: #006e49;
+    }
+    form input{
+      font-size: 16px;
+    }
+
+    form option{
+      font-size: 16px;
+    }
+    form label{
+      font-size: 18px;
+      color: #007bff;
+    }
+
+  </style>
+</head>
+<body>
+
+  <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon">🚀</span>
+                    Career Path Finder
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/blog">Blog</a></li>
+                        <li><a href="/contact">Contact Us</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+  <!-- <h1>Career Path Finder</h1> -->
+ <div class="myform">
+  <div class="formtext">
+  <h1>Tell Us About Yourself</h1>
+</div>
+  <form id="assessmentForm">
+    <label>Interests:</label>
+    <select id="interests" multiple size="7">
+      <option value="technology">Technology</option>
+      <option value="engineering">Engineering</option>
+      <option value="design">Design</option>
+      <option value="healthcare">Healthcare</option>
+      <option value="social ervices">Social Services</option>
+      <option value="creative arts">Creative Arts</option>
+      <option value="education">Education</option>
+    </select>
+
+    <label>Experience:</label>
+    <input id="experience" type="text" placeholder="e.g. 2 years"/>
+
+    <label>Education:</label>
+    <input id="education" type="text" placeholder="e.g. BTech"/>
+
+    <label>Skills (comma separated):</label>
+    <input id="skillsInput" type="text" placeholder="e.g. Python, SQL, HTML"/>
+
+    <button type="submit">Find My Career Path</button>
+  </form>
+  </div>
+
+  <!-- Career Results -->
+  <div id="careers" class="hidden">
+    <h2>Career Options</h2>
+    <div id="career-results"></div>
+  </div>
+
+  <!-- Skill Gap -->
+  <div id="analysis" class="hidden">
+    <h2>Skill Gap Analysis</h2>
+    <canvas id="skillGapChart"></canvas>
+  </div>
+
+  <!-- Salary & Demand -->
+  <div id="salary-demand" class="hidden">
+    <h2>Average Salary & Demand</h2>
+    <canvas id="salaryDemandChart"></canvas>
+  </div>
+
+  <!-- Roadmap -->
+  <div id="roadmap" class="hidden">
+    <h2>Career Roadmap</h2>
+    <div id="roadmap-steps"></div>
+  </div>
+
+  <!-- footer -->
+   <footer>
+    &copy; 2025 Career Path Finder. All rights reserved.
+  </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+const form = document.getElementById("assessmentForm");
+
+form.addEventListener("submit", async function(e) {
+  e.preventDefault();
+  const interests = Array.from(document.getElementById("interests").selectedOptions).map(o => o.value);
+  const experience = document.getElementById("experience").value;
+  const education = document.getElementById("education").value;
+  const skills = document.getElementById("skillsInput").value.split(",").map(s => s.trim()).filter(s => s);
+
+  const btn = form.querySelector("button");
+  btn.disabled = true; btn.textContent = "Generating...";
+
+  try {
+    const resp = await fetch("/api/recommend", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ interests, skills, experience, education })
+    });
+    const data = await resp.json();
+    if (!resp.ok) throw new Error(data.error || "API Error");
+
+    renderCareers(data.careers || []);
+    renderSkillGap(data.skill_gap || {});
+    renderSalaryDemand(data.careers || []);
+    renderRoadmap(data.roadmaps || {});
+
+  } catch (err) {
+    alert("Error: " + err.message);
+    console.error(err);
+  } finally {
+    btn.disabled = false; btn.textContent = "Find My Career Path";
+  }
+});
+
+function renderCareers(careers) {
+  document.getElementById("careers").classList.remove("hidden");
+  const container = document.getElementById("career-results");
+  container.innerHTML = "";
+  careers.forEach(c => {
+    const div = document.createElement("div");
+    div.className = "career-card";
+    const demandClass = c.demand === "high" || c.demand === "very high" ? "high-demand" :
+                        c.demand === "medium" ? "medium-demand" : "low-demand";
+    div.innerHTML = `
+      <div class="career-title">${c.title}</div>
+      <div>${c.description}</div>
+      <div class="career-meta">
+        <span>💰 Salary: ${c.salary_usd || "N/A"}</span><br>
+        <span class="demand ${demandClass}">📈 Demand: ${c.demand}</span><br>
+        <span>✅ Match Score: ${c.match_score}%</span>
+      </div>
+    `;
+    container.appendChild(div);
+  });
+}
+
+function renderSkillGap(skillGap) {
+  if (!Object.keys(skillGap).length) return;
+  document.getElementById("analysis").classList.remove("hidden");
+  const labels = Object.keys(skillGap);
+  const yourLevels = labels.map(l => skillGap[l].your_level);
+  const requiredLevels = labels.map(l => skillGap[l].required_level);
+
+  const ctx = document.getElementById("skillGapChart").getContext("2d");
+  if (window._skillChart) window._skillChart.destroy();
+  window._skillChart = new Chart(ctx, {
+    type: "radar",
+    data: {
+      labels,
+      datasets: [
+        { label: "Your Skills", data: yourLevels, fill: true, borderColor: "blue", backgroundColor: "rgba(0,123,255,0.3)" },
+        { label: "Required Skills", data: requiredLevels, fill: true, borderColor: "red", backgroundColor: "rgba(255,99,132,0.3)" }
+      ]
+    },
+    options: { scales: { r: { min: 0, max: 100 } } }
+  });
+}
+
+function renderSalaryDemand(careers) {
+  if (!careers.length) return;
+  document.getElementById("salary-demand").classList.remove("hidden");
+
+  const labels = careers.map(c => c.title);
+  const salaries = careers.map(c => parseInt(c.salary_usd) || 0);
+  const demandLevels = careers.map(c => {
+    switch(c.demand) {
+      case "very high": return 100;
+      case "high": return 80;
+      case "medium": return 60;
+      case "low": return 40;
+      default: return 20;
+    }
+  });
+
+  const ctx = document.getElementById("salaryDemandChart").getContext("2d");
+  if (window._salaryChart) window._salaryChart.destroy();
+  window._salaryChart = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels,
+      datasets: [
+        { label: "Avg Salary (USD)", data: salaries, backgroundColor: "rgba(54, 162, 235, 0.6)" },
+        { label: "Demand Level", data: demandLevels, backgroundColor: "rgba(255, 206, 86, 0.6)" }
+      ]
+    },
+    options: { responsive: true, scales: { y: { beginAtZero: true } } }
+  });
+}
+
+function renderRoadmap(roadmaps) {
+  if (!Object.keys(roadmaps).length) return;
+  document.getElementById("roadmap").classList.remove("hidden");
+  const container = document.getElementById("roadmap-steps");
+  container.innerHTML = "";
+
+  for (const [career, steps] of Object.entries(roadmaps)) {
+    const title = document.createElement("h3");
+    title.textContent = career;
+    container.appendChild(title);
+
+    steps.forEach(s => {
+      const step = document.createElement("div");
+      step.className = "roadmap-step";
+      step.innerHTML = `
+        <div class="step-title">Step ${s.step}: ${s.title}</div>
+        <p>${s.description}</p>
+        <div class="resources">
+          <strong>Resources:</strong>
+          <ul>${(s.resources || []).map(r => `<li><a href="${r}" target="_blank">${r}</a></li>`).join("")}</ul>
+        </div>
+      `;
+      container.appendChild(step);
+    });
+  }
+}
+</script>
+</body>
+</html>

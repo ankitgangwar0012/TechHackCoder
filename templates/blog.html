@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Blog - Career Path Finder</title>
+  <style>
+    body {
+      background-color: #f9fafb;
+      color: #1e293b;
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: linear-gradient(120deg, #2563eb, #3b82f6);
+      color: white;
+      padding: 1.3rem 0; /* reduced 2px from previous 1.5rem */
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+    }
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+    }
+    .logo-icon {
+      margin-right: 12px;
+      font-size: 2.2rem;
+      line-height: 1;
+      vertical-align: middle;
+      display: inline-block;
+    }
+    nav ul {
+      display: flex;
+      list-style: none;
+      margin: 0;
+    }
+    nav ul li {
+      margin-left: 2rem;
+    }
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: opacity 0.3s;
+    }
+    nav ul li a:hover {
+      opacity: 0.8;
+    }
+    main.container {
+      max-width: 1000px;
+      margin: 3rem auto 4rem;
+      padding: 0 20px;
+      flex-grow: 1;
+    }
+    h1.page-title {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      color: #1e293b;
+      font-weight: 700;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .blog-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+    @media (max-width: 768px) {
+      .blog-list {
+        grid-template-columns: 1fr;
+      }
+    }
+    .blog-post {
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgb(0 0 0 / 0.1);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+    .blog-post:hover {
+      box-shadow: 0 8px 20px rgb(0 0 0 / 0.15);
+      transform: translateY(-6px);
+    }
+    .post-image {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .post-content {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+    .post-title {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #1d4ed8; /* strong blue */
+      margin-bottom: 0.5rem;
+    }
+    .post-date {
+      font-size: 0.85rem;
+      color: #64748b;
+      margin-bottom: 1rem;
+    }
+    .post-summary {
+      flex-grow: 1;
+      font-size: 1rem;
+      color: #334155;
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+    }
+    .read-more {
+      align-self: flex-start;
+      font-weight: 600;
+      color: #2563eb;
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.3s;
+    }
+    .read-more:hover {
+      border-color: #2563eb;
+    }
+    footer {
+      background-color: #1e293b;
+      color: white;
+      padding: 2rem 0;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="logo">
+        <span class="logo-icon" aria-hidden="true">🚀</span>
+        Career Path Finder
+      </div>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/blog" aria-current="page">Blog</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" role="main">
+    <h1 class="page-title">
+      <span aria-hidden="true">📢</span>
+      &nbsp;Latest Blog Posts&nbsp;
+      <span aria-hidden="true">✍️</span>
+    </h1>
+    <section class="blog-list" id="blogList">
+      <!-- Blog posts inserted by JS -->
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 Career Path Finder. All rights reserved.
+  </footer>
+
+  <script>
+    const blogPosts = [
+      {
+        id: 1,
+        title: "Top 5 Skills to Boost Your Career in 2025",
+        date: "2025-09-01",
+        summary: "Discover the most in-demand skills employers are looking for this year and how you can acquire them.",
+        url: "/blog-post-1",
+        image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=400&q=80"
+      },
+      {
+        id: 2,
+        title: "How to Build a Strong Portfolio for Tech Jobs",
+        date: "2025-09-05",
+        summary: "Learn practical tips to create a portfolio that stands out and impresses hiring managers.",
+        url: "/blog-post-2",
+        image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=400&q=80"
+      },
+      {
+        id: 3,
+        title: "Understanding the Future of Remote Work",
+        date: "2025-09-10",
+        summary: "Explore trends shaping remote work and how to adapt your career path accordingly.",
+        url: "/blog-post-3",
+        image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=400&q=80"
+      },
+      {
+        id: 4,
+        title: "Career Roadmaps: Why They Matter and How to Create One",
+        date: "2025-09-15",
+        summary: "A step-by-step guide to planning your career growth with effective roadmaps.",
+        url: "/blog-post-4",
+        image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=400&q=80"
+      }
+    ];
+
+    function formatDate(dateStr) {
+      const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      return new Date(dateStr).toLocaleDateString(undefined, options);
+    }
+
+    function renderBlogPosts() {
+      const blogList = document.getElementById('blogList');
+      blogList.innerHTML = '';
+
+      blogPosts.forEach(post => {
+        const postEl = document.createElement('article');
+        postEl.className = 'blog-post';
+
+        postEl.innerHTML = `
+          <img src="${post.image}" alt="${post.title}" class="post-image" />
+          <div class="post-content">
+            <h2 class="post-title">${post.title}</h2>
+            <time class="post-date" datetime="${post.date}">${formatDate(post.date)}</time>
+            <p class="post-summary">${post.summary}</p>
+            <a href="${post.url}" class="read-more" aria-label="Read more about ${post.title}">Read More &rarr;</a>
+          </div>
+        `;
+
+        blogList.appendChild(postEl);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', renderBlogPosts);
+  </script>
+</body>
+</html>
